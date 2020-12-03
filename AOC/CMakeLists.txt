@@ -23,3 +23,4 @@ endfunction()
 
 Problem(report_repair)
 Problem(password_philosophy)
+Problem(toboggan_trajectory)
