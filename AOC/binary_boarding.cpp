@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <bitset>
 #include <fstream>
+#include <numeric>
 #include <ranges>
 #include <string>
 #include <vector>
@@ -19,8 +20,9 @@ int main() {
     std::vector<usize> indices{};
     std::transform(std::istream_iterator<std::string>{input_file}, {}, std::back_inserter(indices),
                    Index);
-    std::ranges::sort(indices);
-    fmt::print("highest seat index: {}\n", indices.back());
+    auto [min, max] = std::ranges::minmax_element(indices);
+    fmt::print("highest seat index: {}\n", *max);
+    usize n = indices.size();
     fmt::print("index of my seat: {}",
-               *std::ranges::adjacent_find(indices, [](auto x, auto y) { return y != x + 1; }) + 1);
+               (n + *min * 2) * (n + 1) / 2 - std::reduce(indices.begin(), indices.end()));
 }
