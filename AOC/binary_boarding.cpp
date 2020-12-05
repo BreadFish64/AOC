@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <bitset>
 #include <fstream>
 #include <ranges>
 #include <string>
@@ -8,17 +9,9 @@
 
 #include "types.hpp"
 
-usize Index(const std::string& string) {
-    usize idx{0};
-    for (char c : std::string_view{string.data(), 7}) {
-        idx <<= 1;
-        idx |= (c == 'B');
-    }
-    for (char c : std::string_view{string.data() + 7, 3}) {
-        idx <<= 1;
-        idx |= (c == 'R');
-    }
-    return idx;
+usize Index(const std::string& str) {
+    return std::bitset<7>(str, 0, 7, 'F', 'B').to_ullong() << 3 |
+           std::bitset<3>(str, 7, 3, 'L', 'R').to_ullong();
 }
 
 int main() {
@@ -26,11 +19,8 @@ int main() {
     std::vector<usize> indices{};
     std::transform(std::istream_iterator<std::string>{input_file}, {}, std::back_inserter(indices),
                    Index);
-    fmt::print("highest seat index: {}\n", *std::ranges::max_element(indices));
-    std::array<char, 1024> plane{};
-    std::ranges::fill(plane, 'O');
-    for (usize seat : indices) plane[seat] = 'X';
-    auto search_start = std::find(plane.begin(), plane.end(), 'X');
-    auto my_seat = std::find(search_start, plane.end(), 'O');
-    fmt::print("index of my seat: {}", my_seat - plane.begin());
+    std::ranges::sort(indices);
+    fmt::print("highest seat index: {}\n", indices.back());
+    fmt::print("index of my seat: {}",
+               *std::ranges::adjacent_find(indices, [](auto x, auto y) { return y != x + 1; }) + 1);
 }
