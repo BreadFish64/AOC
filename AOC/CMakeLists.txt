@@ -1,8 +1,9 @@
 ﻿find_package(fmt REQUIRED)
 
 function(Problem problem_name)
+
 add_executable (${problem_name}
-	${problem_name}.cpp
+    ${problem_name}.cpp
     types.hpp
 )
 
@@ -27,3 +28,9 @@ Problem(toboggan_trajectory)
 Problem(passport_processing)
 Problem(binary_boarding)
 Problem(custom_customs)
+Problem(handy_haversacks)
+Problem(handheld_halting)
+Problem(encoding_error)
+Problem(adapter_array)
+Problem(seating_system)
+Problem(rain_risk)
