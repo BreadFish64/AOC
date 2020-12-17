@@ -1,0 +1,24 @@
+#version 460
+
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+layout(binding = 0, r8i) uniform readonly restrict iimage3D in_image;
+layout(binding = 1, r8i) uniform writeonly restrict iimage3D out_image;
+
+const int pound = 0x23;
+const int period = 0x2E;
+
+void main() {
+    ivec3 coord = ivec3(gl_GlobalInvocationID);
+    int cube = imageLoad(in_image, coord).x;
+    uint active_neighbors = 0;
+    for (int x = -1; x <= 1; ++x) {
+        for (int y = -1; y <= 1; ++y) {
+            for (int z = -1; z <= 1; ++z) {
+                int neighbor = imageLoad(in_image, coord + ivec3(x, y, z)).x;
+                if (neighbor == pound) ++active_neighbors;
+            }
+        }
+    }
+    bool activate_cube = active_neighbors == 3 || (cube == pound && active_neighbors == 4);
+    imageStore(out_image, coord, ivec4(activate_cube ? pound : period));
+}

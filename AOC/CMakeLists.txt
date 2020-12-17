@@ -1,4 +1,6 @@
 ﻿find_package(fmt REQUIRED)
+find_package(glad REQUIRED)
+find_package(SDL2 REQUIRED)
 
 function(Problem problem_name)
 
@@ -37,3 +39,11 @@ Problem(rain_risk)
 Problem(shuttle_search)
 Problem(docking_data)
 Problem(rambunctious_recitation)
+Problem(conway_cubes)
+add_custom_command(
+        TARGET conway_cubes POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_SOURCE_DIR}/conway_cubes.comp
+                ${CMAKE_BINARY_DIR}/conway_cubes/conway_cubes.comp)
+target_sources(conway_cubes PRIVATE open_gl.hpp sdl_helper.hpp)
+target_link_libraries(conway_cubes PRIVATE glad::glad SDL2::SDL2)

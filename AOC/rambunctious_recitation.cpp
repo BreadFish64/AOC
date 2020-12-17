@@ -20,8 +20,9 @@ int main() {
             if (is_new) {
                 num = 0;
             } else {
-                num = round - it->second;
-                it->second = round;
+                auto& previous_round = it->second;
+                num = round - previous_round;
+                previous_round = round;
             }
         }
         fmt::print("Round {}: {}\n", round, num);
