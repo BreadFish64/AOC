@@ -4,12 +4,15 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <fstream>
 #include <iterator>
 #include <memory>
 #include <optional>
 #include <span>
 #include <string_view>
 #include <utility>
+
+#include <fmt/ostream.h>
 
 using namespace std::literals;
 
