@@ -49,3 +49,4 @@ target_sources(conway_cubes PRIVATE open_gl.hpp sdl_helper.hpp)
 target_link_libraries(conway_cubes PRIVATE glad::glad SDL2::SDL2)
 
 Problem(sonar_sweep)
+Problem(dive)
