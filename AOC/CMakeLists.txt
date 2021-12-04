@@ -50,3 +50,5 @@ target_link_libraries(conway_cubes PRIVATE glad::glad SDL2::SDL2)
 
 Problem(sonar_sweep)
 Problem(dive)
+Problem(binary_diagnostic)
+Problem(giant_squid)

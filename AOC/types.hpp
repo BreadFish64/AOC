@@ -1,18 +1,28 @@
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <atomic>
+#include <bit>
+#include <bitset>
 #include <cstddef>
 #include <cstdint>
+#include <execution>
 #include <fstream>
 #include <iterator>
 #include <memory>
+#include <numeric>
 #include <optional>
+#include <set>
 #include <span>
 #include <string_view>
+#include <unordered_set>
 #include <utility>
 
+#include <immintrin.h>
+
 #include <fmt/ostream.h>
+#include <fmt/ranges.h>
 
 using namespace std::literals;
 
