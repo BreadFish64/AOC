@@ -1,6 +1,7 @@
 ﻿find_package(fmt REQUIRED)
 find_package(glad REQUIRED)
 find_package(SDL2 REQUIRED)
+find_package(Boost REQUIRED)
 
 function(Problem problem_name)
 
@@ -52,3 +53,5 @@ Problem(sonar_sweep)
 Problem(dive)
 Problem(binary_diagnostic)
 Problem(giant_squid)
+target_link_libraries(giant_squid PRIVATE Boost::boost)
+Problem(hydrothermal_venture)

@@ -13,6 +13,7 @@
 #include <memory>
 #include <numeric>
 #include <optional>
+#include <ranges>
 #include <set>
 #include <span>
 #include <string_view>
@@ -21,6 +22,7 @@
 
 #include <immintrin.h>
 
+#include <fmt/chrono.h>
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>
 
