@@ -10,12 +10,14 @@
 #include <execution>
 #include <fstream>
 #include <iterator>
+#include <map>
 #include <memory>
 #include <numeric>
 #include <optional>
 #include <ranges>
 #include <set>
 #include <span>
+#include <string>
 #include <string_view>
 #include <unordered_set>
 #include <utility>
@@ -42,5 +44,6 @@ using f32 = float;
 using f64 = double;
 
 using usize = std::size_t;
+using ssize = std::make_signed_t<usize>;
 
 constexpr usize operator""_sz(unsigned long long x) { return static_cast<usize>(x); }
