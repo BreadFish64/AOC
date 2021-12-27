@@ -170,9 +170,11 @@ void InitContext(std::string_view name, unsigned width, unsigned height) {
         std::exit(1);
     }
 
-    glEnable(GL_DEBUG_OUTPUT);
-    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-    glDebugMessageCallback(DebugHandler, nullptr);
+    if (true) {
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(DebugHandler, nullptr);
+    }
 }
 
 } // namespace OpenGL

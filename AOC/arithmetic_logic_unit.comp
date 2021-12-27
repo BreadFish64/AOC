@@ -1,0 +1,135 @@
+#version 460
+
+#extension GL_NV_gpu_shader5 : enable
+
+layout(local_size_x = 9, local_size_y = 9, local_size_z = 9) in;
+
+layout(location = 0) uniform ivec4 state;
+layout (std430, binding = 0) writeonly restrict buffer SuccessBuffer{
+    uint8_t succeeded[9 * 9 * 9 * 9 * 9 * 9];
+};
+
+void add(inout int dst, int src) { dst += src; }
+void mul(inout int dst, int src) { dst *= src; }
+void div(inout int dst, int src) { dst /= src; }
+void mod(inout int dst, int src) { dst %= src; }
+void eql(inout int dst, int src) { dst = dst == src ? 1 : 0; }
+
+void main() {
+    int x = state.x, y = state.y, z = state.z, w = state.w;
+
+w = int(gl_WorkGroupID.z + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,26);
+add(x,-9);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,10);
+mul(y,x);
+add(z,y);
+w = int(gl_WorkGroupID.y + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,1);
+add(x,11);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,1);
+mul(y,x);
+add(z,y);
+w = int(gl_WorkGroupID.x + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,26);
+add(x,0);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,2);
+mul(y,x);
+add(z,y);
+w = int(gl_LocalInvocationID.z + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,26);
+add(x,-5);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,14);
+mul(y,x);
+add(z,y);
+w = int(gl_LocalInvocationID.y + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,26);
+add(x,-6);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,6);
+mul(y,x);
+add(z,y);
+w = int(gl_LocalInvocationID.x + 1);
+mul(x,0);
+add(x,z);
+mod(x,26);
+div(z,26);
+add(x,-12);
+eql(x,w);
+eql(x,0);
+mul(y,0);
+add(y,25);
+mul(y,x);
+add(y,1);
+mul(z,y);
+mul(y,0);
+add(y,w);
+add(y,14);
+mul(y,x);
+add(z,y);
+    uint idx = 0;
+    idx = idx * 9 + gl_WorkGroupID.z;
+    idx = idx * 9 + gl_WorkGroupID.y;
+    idx = idx * 9 + gl_WorkGroupID.x;
+    idx = idx * 9 * 9 * 9 + gl_LocalInvocationIndex;
+    succeeded[idx] = uint8_t(z == 0 ? 1u : 0u);
+}

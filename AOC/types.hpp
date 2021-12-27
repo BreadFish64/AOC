@@ -47,3 +47,14 @@ using usize = std::size_t;
 using ssize = std::make_signed_t<usize>;
 
 constexpr usize operator""_sz(unsigned long long x) { return static_cast<usize>(x); }
+
+template <std::unsigned_integral I>
+constexpr I AlignUp(I x, I alignment) {
+    I mod = x % alignment;
+    return mod ? x + alignment - mod : x;
+}
+
+template <std::unsigned_integral I>
+constexpr I DivCeil(I x, I y) {
+    return (x + y - 1) / y;
+}

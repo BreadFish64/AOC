@@ -42,7 +42,6 @@ int main() {
     };
     while (computing) {
         computing = false;
-        // fmt::print("{}\n", path_len[MAX_IDX][MAX_IDX]);
         for (usize y = 0; y < SIZE; ++y) {
             for (usize x = 0; x < SIZE; ++x) {
                 auto min_adjacent = std::min(

@@ -1,4 +1,5 @@
 ﻿find_package(fmt REQUIRED)
+find_package(scn REQUIRED)
 find_package(glad REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(Boost REQUIRED)
@@ -65,3 +66,25 @@ Problem(passage_pathing)
 Problem(transparent_origami)
 Problem(extended_polymerization)
 Problem(chiton)
+Problem(packet_decoder)
+Problem(trick_shot)
+Problem(snailfish)
+Problem(beacon_scanner)
+Problem(trench_map)
+target_sources(trench_map PRIVATE open_gl.hpp sdl_helper.hpp)
+target_link_libraries(trench_map PRIVATE glad::glad SDL2::SDL2)
+
+Problem(dirac_dice)
+Problem(reactor_reboot)
+target_link_libraries(reactor_reboot PRIVATE Boost::boost scn::scn)
+
+Problem(arithmetic_logic_unit)
+add_custom_command(
+        TARGET arithmetic_logic_unit POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_SOURCE_DIR}/arithmetic_logic_unit.comp
+                ${CMAKE_BINARY_DIR}/arithmetic_logic_unit/arithmetic_logic_unit.comp)
+target_sources(arithmetic_logic_unit PRIVATE open_gl.hpp sdl_helper.hpp)
+target_link_libraries(arithmetic_logic_unit PRIVATE glad::glad SDL2::SDL2)
+
+Problem(sea_cucumber)
